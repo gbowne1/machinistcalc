@@ -1,0 +1,20 @@
+{
+	"recommendations": [
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"magicstack.magicpython",
+		"ms-python.python",
+		"donjayamanne.python-extension-pack",
+		"magicstack.magicpython",
+		"ms-python.vscode-pylance",
+		"dongli.python-preview",
+		"tht13.python",
+		"dongli.python-preview",
+		"KevinRose.vsc-python-indent",
+		"tushortz.python-extended-snippets",
+		"ms-python.pylint",
+		"frhtylcn.pythonsnippets",
+		"mgesbert.python-path",
+		"LittleFoxTeam.vscode-python-test-adapter"
+	]
+}

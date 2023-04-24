@@ -1,0 +1,21 @@
+{
+    "python.pythonPath": "/usr/bin/python3", // Path to the Python interpreter
+    "python.formatting.provider": "black", // The formatter to use for code formatting
+    "python.linting.enabled": true, // Enable linting
+    "python.linting.pylintEnabled": false, // Disable pylint in favor of flake8
+    "python.linting.flake8Enabled": true, // Enable flake8 for linting
+    "python.linting.flake8Args": [
+        "--ignore=E501" // Ignore line length errors
+    ],
+    "python.testing.pytestEnabled": true, // Enable pytest for testing
+    "python.testing.pytestArgs": [
+        "--cov=.", // Enable code coverage
+        "--cov-report=html"
+    ],
+    "python.autoComplete.addBrackets": true, // Auto-add brackets after function names
+    "python.formatting.autopep8Args": [
+        "--max-line-length=100" // Set the maximum line length to 100 characters
+    ],
+    "python.formatting.autopep8Path": "/usr/local/bin/autopep8", // Path to the autopep8 formatter
+    "editor.formatOnSave": true // Enable formatting on save
+}
