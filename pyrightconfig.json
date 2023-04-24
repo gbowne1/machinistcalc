@@ -1,0 +1,11 @@
+{
+    "include": ["machinistcalc/**/*.py"],
+    "exclude": ["**/__pycache__", "**/*.venv"],
+    "pythonVersion": "3.8",
+    "typeCheckingMode": "basic",
+    "executionEnvironments": [
+        {
+            "root": "machinistcalc"
+        }
+    ]
+}
