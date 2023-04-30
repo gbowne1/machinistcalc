@@ -1,28 +1,30 @@
-# User inputs
-length = 12 # inches
-width = 4 # inches
-thickness = 0.25 # inches
-bend_angle = 90 # degrees
-inner_radius = 0.5 # inches
-k_factor = 0.35
-tensile_strength = 50000 # psi
-die_opening = 1 # inches
+from typing import Tuple
 
-# Convert angle to radians
-angle_radians = bend_angle * (3.14159265359/180)
 
-# Calculate bend allowance
-bend_allowance = angle_radians * (inner_radius + k_factor * thickness)
+def bend_calc(
+    length,
+    width,
+    thickness,
+    bend_angle,
+    inner_radius,
+    k_factor,
+    tensile_strength,
+    die_opening,
+    material_factor=1,
+    k_constant=50,
+) -> Tuple[float, float, float]:
 
-# Calculate K-factor
-k_factor_calculated = (bend_allowance / thickness) / (0.01745 * inner_radius + 1)
+    # Convert angle to radians
+    angle_radians = bend_angle * (3.14159265359 / 180)
 
-# Calculate tonnage
-material_factor = 1
-k_constant = 50
-tonnage = (k_constant * length * thickness * tensile_strength) / (die_opening * material_factor)
+    # Calculate bend allowance
+    bend_allowance = angle_radians * (inner_radius + k_factor * thickness)
 
-# Output results
-print("Bend allowance = ", bend_allowance, "inches")
-print("K-factor = ", k_factor_calculated)
-print("Tonnage required = ", tonnage, "tons")
+    # Calculate K-factor
+    k_factor_calculated = (bend_allowance / thickness) / (0.01745 * inner_radius + 1)
+
+    tonnage = (k_constant * length * thickness * tensile_strength) / (
+        die_opening * material_factor
+    )
+
+    return bend_allowance, k_factor_calculated, tonnage
