@@ -1,21 +1,47 @@
 {
-    "python.pythonPath": "/usr/bin/python3", // Path to the Python interpreter
-    "python.formatting.provider": "black", // The formatter to use for code formatting
-    "python.linting.enabled": true, // Enable linting
-    "python.linting.pylintEnabled": false, // Disable pylint in favor of flake8
-    "python.linting.flake8Enabled": true, // Enable flake8 for linting
-    "python.linting.flake8Args": [
-        "--ignore=E501" // Ignore line length errors
-    ],
-    "python.testing.pytestEnabled": true, // Enable pytest for testing
-    "python.testing.pytestArgs": [
-        "--cov=.", // Enable code coverage
-        "--cov-report=html"
-    ],
-    "python.autoComplete.addBrackets": true, // Auto-add brackets after function names
-    "python.formatting.autopep8Args": [
-        "--max-line-length=100" // Set the maximum line length to 100 characters
-    ],
-    "python.formatting.autopep8Path": "/usr/local/bin/autopep8", // Path to the autopep8 formatter
-    "editor.formatOnSave": true // Enable formatting on save
+	// The formatter to use for code formatting
+	"python.formatting.provider": "black",
+	// Enable linting
+	"python.linting.enabled": true,
+	// Disable pylint in favor of flake8
+	"python.linting.pylintEnabled": true,
+	"python.linting.flake8Enabled": false,
+	// Ignore line length errors
+	"python.linting.flake8Args": [
+		"--ignore=E501,E203,E266,W503",
+		"--max-line-length=120",
+		"--exclude=.git,__pycache__,.venv"
+	],
+	// Enable pytest for testing
+	"python.testing.pytestEnabled": true,
+	"python.testing.pytestArgs": [
+		"--cov=.",
+		"--cov-report=html",
+		"term-missing"
+	],
+	// Enable bandit for security linting
+	"python.linting.banditPath": "~/.local/bin/bandit",
+	"python.linting.banditEnabled": true,
+	// Specify paths to linters
+	"python.linting.pylintPath": "~/.local/bin/pylint",
+	"python.linting.mypyPath": "~/.local/bin/mypy",
+	"python.linting.flake8Path": "~/.local/bin/flake8",
+	// Specify pylint arguments
+	"python.linting.pylintArgs": [
+		"--max-line-length=120",
+		"--disable=C0114,C0115,C0116,R0913,W0703,W1203",
+		"--enable=E1101,E1136,R1710,R1711,R1712,R1713,R1714,R1715,R1716,R1717,R1718,R1719"
+	],
+	// Enable mypy for type checking
+	"python.linting.mypyEnabled": true,
+	"python.linting.mypyArgs": [
+		"--ignore-missing-imports"
+	],
+	// Specify black formatter arguments
+	"python.formatting.blackArgs": [
+		"--line-length=120",
+		"--skip-string-normalization",
+		"--single-quotes"
+	],
+	"python.formatting.blackPath": "~/.local/bin/black"
 }

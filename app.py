@@ -1,6 +1,6 @@
+from app.bendcalc import bend_calc
 from app.lathecalc import lathe_calc
 from app.sheetmetalcalc import sheetmetal_calc
-from app.bendcalc import bend_calc
 
 
 class Menu:
@@ -49,11 +49,11 @@ class Menu:
     def _bendcalc(self) -> None:
         length = float(input("Enter length in inches: "))
         width = float(input("Enter width in inches: "))
-        thickness = float(input("Enter thickness in inches: "))
-        bend_angle = float(input("Enter the degree og thickness bend angle: "))
+        thickness = float(input("Enter material thickness in inches: "))
+        bend_angle = float(input("Enter the bend angle in degrees radians: "))
         inner_radius = float(input("Enter inner radius in inches: "))
-        k_factor = float(input("Enter k-factor in inches: "))
-        tensile_strength = float(input("Enter tensile strenght in psi: "))
+        k_factor = float(input("Enter k-factor: "))
+        tensile_strength = float(input("Enter tensile strength in psi: "))
         die_opening = float(input("Enter die opening in inches: "))
 
         bend_allowance, k_factor_calculated, tonnage = bend_calc(
