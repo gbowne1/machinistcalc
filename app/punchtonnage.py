@@ -2,7 +2,7 @@ import math
 from typing import Tuple
 
 
-def punchtonnage():
+def punch_tonnage():
     print("Punch Tonnage Calculator")
     print("-----------------------")
 

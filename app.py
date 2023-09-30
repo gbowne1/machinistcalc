@@ -20,6 +20,14 @@ def menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
+            length = float(input("Enter length in inches: "))
+            width = float(input("Enter width in inches: "))
+            thickness = float(input("Enter thickness in inches: "))
+            bend_angle = float(input("Enter bend angle in degrees: "))
+            inner_radius = float(input("Enter inner radius in inches: "))
+            k_factor = float(input("Enter K-factor: "))
+            tensile_strength = float(input("Enter tensile strength in pounds per square inch: "))
+            die_opening = float(input("Enter die opening in inches: "))
             bend_calc(length, width, thickness, bend_angle, inner_radius, k_factor, tensile_strength, die_opening)
         elif choice == "2":
             lathe_calc(diameter, surface_speed, feed_rate, number_of_teeth)
