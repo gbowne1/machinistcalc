@@ -1,6 +1,7 @@
 from app.bendcalc import bend_calc
 from app.lathecalc import lathe_calc
 from app.sheetmetalcalc import sheetmetal_calc
+from app.speedfeed import main_app
 
 
 class Menu:
@@ -76,8 +77,16 @@ class Menu:
 
         return
 
+    def _speedfeed(self) -> None:
+        main_app()
+
     def menu(self, option: int) -> None:
-        options = {1: self._lathecalc, 2: self._sheetmetalcalc, 3: self._bendcalc}
+        options = {
+            1: self._lathecalc,
+            2: self._sheetmetalcalc,
+            3: self._bendcalc,
+            4: self._speedfeed,
+        }
         try:
             options[option]()
         except KeyError:
@@ -91,6 +100,7 @@ class Menu:
                 print("1. Lathe Calculator")
                 print("2. Sheet Metal Calculator")
                 print("3. Bend Calculator")
+                print("4. Speed and Feed Calculator")
                 print("\n")
 
                 selection = int(input("Enter selection: "))
