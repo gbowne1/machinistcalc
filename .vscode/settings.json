@@ -1,6 +1,6 @@
 {
 	// The formatter to use for code formatting
-	"python.formatting.provider": "black",
+	"python.formatting.provider": "none",
 	// Enable linting
 	"python.linting.enabled": true,
 	// Disable pylint in favor of flake8
@@ -43,5 +43,8 @@
 		"--skip-string-normalization",
 		"--single-quotes"
 	],
-	"python.formatting.blackPath": "~/.local/bin/black"
+	"python.formatting.blackPath": "~/.local/bin/black",
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter"
+	}
 }
