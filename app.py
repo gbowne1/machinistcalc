@@ -30,6 +30,10 @@ def menu():
             die_opening = float(input("Enter die opening in inches: "))
             bend_calc(length, width, thickness, bend_angle, inner_radius, k_factor, tensile_strength, die_opening)
         elif choice == "2":
+            diameter = float(input("Enter diameter in inches: "))
+            surface_speed = float(input("Enter surface speed in feet per minute: "))
+            feed_rate = float(input("Enter feed rate in inches per revolution: "))
+            number_of_teeth = float(input("Enter number of teeth: "))
             lathe_calc(diameter, surface_speed, feed_rate, number_of_teeth)
         elif choice == "3":
             sheet_width = float(input("Enter sheet width in inches: "))
