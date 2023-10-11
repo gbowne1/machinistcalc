@@ -28,14 +28,24 @@ def menu():
             k_factor = float(input("Enter K-factor: "))
             tensile_strength = float(input("Enter tensile strength in pounds per square inch: "))
             die_opening = float(input("Enter die opening in inches: "))
-            bend_calc(length, width, thickness, bend_angle, inner_radius, k_factor, tensile_strength, die_opening)
+
+            # Call the bend_calc function and capture the calculated values
+            bend_allowance, k_factor_calculated, tonnage = bend_calc(
+                length, width, thickness, bend_angle, inner_radius, k_factor, tensile_strength, die_opening
+            )
+
+            # Now you can use the calculated values as needed
+            print("Bend Allowance:", bend_allowance)
+            print("K-Factor Calculated:", k_factor_calculated)
+            print("Tonnage:", tonnage)
+
         elif choice == "2":
             diameter = float(input("Enter diameter in inches: "))
             surface_speed = float(input("Enter surface speed in feet per minute: "))
             feed_rate = float(input("Enter feed rate in inches per revolution: "))
             number_of_teeth = float(input("Enter number of teeth: "))
             lathe_calc(diameter, surface_speed, feed_rate, number_of_teeth)
-        elif choice == "3":
+        if choice == "3":
             sheet_width = float(input("Enter sheet width in inches: "))
             sheet_length = float(input("Enter sheet length in inches: "))
             part_width = float(input("Enter part width in inches: "))
@@ -43,7 +53,27 @@ def menu():
             edge_margin = float(input("Enter edge margin in inches: "))
             row_margin = float(input("Enter row margin in inches: "))
             col_margin = float(input("Enter column margin in inches: "))
-            sheetmetal_calc(sheet_width, sheet_length, part_width, part_length, edge_margin, row_margin, col_margin)
+            num_parts_needed = int(input("Enter the number of parts needed: "))
+            num_sheets_supplied = int(input("Enter the number of sheets supplied: "))
+
+            # Call the sheetmetal_calc function and capture the calculated values
+            num_parts, num_parts_rotated, num_sheets_required, num_sheets_remaining = sheetmetal_calc(
+                sheet_width,
+                sheet_length,
+                part_width,
+                part_length,
+                edge_margin,
+                row_margin,
+                col_margin,
+                num_parts_needed,
+                num_sheets_supplied,
+            )
+
+            # Print the calculated values
+            print("Number of parts:", num_parts)
+            print("Number of parts with 45-degree rotation:", num_parts_rotated)
+            print("Number of sheets required:", num_sheets_required)
+            print("Number of sheets remaining:", num_sheets_remaining)
         elif choice == "4":
             speed_feed()
         elif choice == "5":

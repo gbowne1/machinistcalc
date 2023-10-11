@@ -1,0 +1,268 @@
+I am creating a python3 application for Shortwave Radio listeners and Amateur radio operators called RadioLogger.  I am using
+
+pyton3 3.7.3
+
+I am using VSCode for debian linux installed on a Debian 10 Buster linux with Bash 5.0.3 and linux kernel 4.19.0-25-amd64.
+
+This application is primarily for machinists, machine operators, metalworkers, fabricators, engineering workshops, millwrights.
+
+Here is the structure.
+machinistcalc/
++-- __pycache__/
++-- .github/
++-- .vscode/
+    +-- extensions.json
+    +-- launch.json
+    +-- settings.json
+    +-- tasks.json
++-- app/
+    +-- __pycache__/
+    +-- __init__.py
+    +-- bendcalc.py
+	+-- lathecalc.py
+	+-- lathespeed.py
+	+-- punchtonnage.py
+	+-- sheetmetalcalc.py
++-- tests/
+    +-- __pycache__/
+	+-- .pytest_cache
+	+-- test.py
++-- __init__.py
++-- .editorconfig
++-- .flake8
++-- .gitignore
++-- app.py
++-- LICENSE
++-- pyrightconfig.json
++-- README.md
++-- requirements.txt
+
+here are the extensions I have installed:
+
+"ms-python.python",
+"ms-python.vscode-pylance",
+"magicstack.magicpython",
+"ms-python.python",
+"donjayamanne.python-extension-pack",
+"magicstack.magicpython",
+"ms-python.vscode-pylance",
+"dongli.python-preview",
+"KevinRose.vsc-python-indent",
+"tushortz.python-extended-snippets",
+"ms-python.pylint",
+"frhtylcn.pythonsnippets",
+"mgesbert.python-path",
+"LittleFoxTeam.vscode-python-test-adapter"
+
+here is the launch.json
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "/${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Module",
+            "type": "python",
+            "request": "launch",
+            "module": "module.name",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Attach",
+            "type": "python",
+            "request": "attach",
+            "port": 3000,
+            "host": "localhost"
+        }
+    ]
+}
+
+here is the settings.json
+
+{
+	// The formatter to use for code formatting
+	"python.formatting.provider": "none",
+	// Enable linting
+	"python.linting.enabled": true,
+	// Disable pylint in favor of flake8
+	"python.linting.pylintEnabled": true,
+	"python.linting.flake8Enabled": false,
+	// Ignore line length errors
+	"python.linting.flake8Args": [
+		"--ignore=E501,E203,E266,W503",
+		"--max-line-length=120",
+		"--exclude=.git,__pycache__,.venv"
+	],
+	// Enable pytest for testing
+	"python.testing.pytestEnabled": true,
+	"python.testing.pytestArgs": [
+		"--cov=.",
+		"--cov-report=html",
+		"term-missing"
+	],
+	// Enable bandit for security linting
+	"python.linting.banditPath": "~/.local/bin/bandit",
+	"python.linting.banditEnabled": true,
+	// Specify paths to linters
+	"python.linting.pylintPath": "~/.local/bin/pylint",
+	"python.linting.mypyPath": "~/.local/bin/mypy",
+	"python.linting.flake8Path": "~/.local/bin/flake8",
+	// Specify pylint arguments
+	"python.linting.pylintArgs": [
+		"--max-line-length=120",
+		"--disable=C0114,C0115,C0116,R0913,W0703,W1203",
+		"--enable=E1101,E1136,R1710,R1711,R1712,R1713,R1714,R1715,R1716,R1717,R1718,R1719"
+	],
+	// Enable mypy for type checking
+	"python.linting.mypyEnabled": true,
+	"python.linting.mypyArgs": [
+		"--ignore-missing-imports"
+	],
+	// Specify black formatter arguments
+	"python.formatting.blackArgs": [
+		"--line-length=120",
+		"--skip-string-normalization",
+		"--single-quotes"
+	],
+	"python.formatting.blackPath": "~/.local/bin/black",
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter"
+	}
+}
+
+and the tasks.json
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Python",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "/${file}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build Source",
+            "type": "shell",
+            "command": "/${command:python.interpreterPath}",
+            "args": [
+                "setup.py",
+                "sdist"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
+
+
+here is the __init__.py in the app folder
+
+# __init__.py
+
+# Importing modules from the package
+from app.bendcalc import bend_calc
+from app.lathecalc import lathe_calc
+from app.punchtonnage import punch_tonnage
+from app.sheetmetalcalc import sheetmetal_calc
+from app.speedfeed import speed_feed
+
+here is the __init__.py in the project root # __init__.py
+
+# Importing modules from the package
+from app.bendcalc import bend_calc
+from app.lathecalc import lathe_calc
+from app.punchtonnage import punch_tonnage
+from app.sheetmetalcalc import sheetmetal_calc
+from app.speedfeed import speed_feed
+
+here is the test.py in /tests
+
+import pytest
+from machinistcalc.app.speedfeed import calculate_speed, calculate_feed
+
+def test_calculate_speed():
+    result = calculate_speed(1000, 2)
+    expected = 500
+    assert result == expected
+
+def test_calculate_feed():
+    result = calculate_feed(1000, 2)
+    expected = 2000
+    assert result == expected
+
+here is the app.py
+
+from app.bendcalc import bend_calc
+from app.lathecalc import lathe_calc
+from app.punchtonnage import punch_tonnage
+from app.sheetmetalcalc import sheetmetal_calc
+from app.speedfeed import (calculate_afpt, calculate_feed, calculate_hp,
+                           calculate_ipt, calculate_mrr, calculate_sfm,
+                           calculate_speed, speed_feed)
+
+
+def menu():
+    while True:
+        print("Select a calculator:")
+        print("1. Bend Calculator")
+        print("2. Lathe Calculator")
+        print("3. Sheet Metal Calculator")
+        print("4. Speed and Feed Calculator")
+        print("5. Punch Tonnage Calculator")
+        print("6. Quit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            length = float(input("Enter length in inches: "))
+            width = float(input("Enter width in inches: "))
+            thickness = float(input("Enter thickness in inches: "))
+            bend_angle = float(input("Enter bend angle in degrees: "))
+            inner_radius = float(input("Enter inner radius in inches: "))
+            k_factor = float(input("Enter K-factor: "))
+            tensile_strength = float(input("Enter tensile strength in pounds per square inch: "))
+            die_opening = float(input("Enter die opening in inches: "))
+            bend_calc(length, width, thickness, bend_angle, inner_radius, k_factor, tensile_strength, die_opening)
+        elif choice == "2":
+            diameter = float(input("Enter diameter in inches: "))
+            surface_speed = float(input("Enter surface speed in feet per minute: "))
+            feed_rate = float(input("Enter feed rate in inches per revolution: "))
+            number_of_teeth = float(input("Enter number of teeth: "))
+            lathe_calc(diameter, surface_speed, feed_rate, number_of_teeth)
+        elif choice == "3":
+            sheet_width = float(input("Enter sheet width in inches: "))
+            sheet_length = float(input("Enter sheet length in inches: "))
+            part_width = float(input("Enter part width in inches: "))
+            part_length = float(input("Enter part length in inches: "))
+            edge_margin = float(input("Enter edge margin in inches: "))
+            row_margin = float(input("Enter row margin in inches: "))
+            col_margin = float(input("Enter column margin in inches: "))
+            sheetmetal_calc(sheet_width, sheet_length, part_width, part_length, edge_margin, row_margin, col_margin)
+        elif choice == "4":
+            speed_feed()
+        elif choice == "5":
+            punch_tonnage()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    menu()

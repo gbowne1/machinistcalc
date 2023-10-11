@@ -1,0 +1,5 @@
+[flake8]
+# W291 - we dont care about trailing whitespace
+# E302 - one line between functions is fine
+ignore = W291,E302
+exclude = ignore_this.py

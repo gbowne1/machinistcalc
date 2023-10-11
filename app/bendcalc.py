@@ -3,20 +3,19 @@ from typing import Tuple
 
 
 def bend_calc(
-    length,
-    width,
-    thickness,
-    bend_angle,
-    inner_radius,
-    k_factor,
-    tensile_strength,
-    die_opening,
-    material_factor=1,
-    k_constant=50,
+    length: float,
+    width: float,
+    thickness: float,
+    bend_angle: float,
+    inner_radius: float,
+    k_factor: float,
+    tensile_strength: float,
+    die_opening: float,
+    material_factor: float = 1,
+    k_constant: float = 50,
 ) -> Tuple[float, float, float]:
-
     # Convert angle to radians
-    angle_radians = bend_angle * (3.14159265359 / 180)
+    angle_radians = bend_angle * (math.pi / 180)
 
     # Calculate bend allowance
     bend_allowance = angle_radians * (inner_radius + k_factor * thickness)
@@ -24,7 +23,8 @@ def bend_calc(
     # Calculate K-factor
     k_factor_calculated = (bend_allowance / thickness) / (0.01745 * inner_radius + 1)
 
-    tonnage = (k_constant * length * thickness * tensile_strength) / (
+    # Calculate tonnage
+    tonnage = (k_constant * length * width * thickness * tensile_strength) / (
         die_opening * material_factor
     )
 
