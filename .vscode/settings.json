@@ -1,50 +1,33 @@
 {
-	// The formatter to use for code formatting
-	"python.formatting.provider": "none",
-	// Enable linting
-	"python.linting.enabled": true,
-	// Disable pylint in favor of flake8
-	"python.linting.pylintEnabled": true,
-	"python.linting.flake8Enabled": false,
-	// Ignore line length errors
-	"python.linting.flake8Args": [
-		"--ignore=E501,E203,E266,W503",
-		"--max-line-length=120",
-		"--exclude=.git,__pycache__,.venv"
-	],
-	// Enable pytest for testing
 	"python.testing.pytestEnabled": true,
 	"python.testing.pytestArgs": [
 		"--cov=.",
 		"--cov-report=html",
 		"term-missing"
 	],
-	// Enable bandit for security linting
-	"python.linting.banditPath": "~/.local/bin/bandit",
-	"python.linting.banditEnabled": true,
-	// Specify paths to linters
-	"python.linting.pylintPath": "~/.local/bin/pylint",
-	"python.linting.mypyPath": "~/.local/bin/mypy",
-	"python.linting.flake8Path": "~/.local/bin/flake8",
-	// Specify pylint arguments
-	"python.linting.pylintArgs": [
-		"--max-line-length=120",
-		"--disable=C0114,C0115,C0116,R0913,W0703,W1203",
-		"--enable=E1101,E1136,R1710,R1711,R1712,R1713,R1714,R1715,R1716,R1717,R1718,R1719"
-	],
-	// Enable mypy for type checking
-	"python.linting.mypyEnabled": true,
-	"python.linting.mypyArgs": [
-		"--ignore-missing-imports"
-	],
-	// Specify black formatter arguments
-	"python.formatting.blackArgs": [
-		"--line-length=120",
-		"--skip-string-normalization",
-		"--single-quotes"
-	],
-	"python.formatting.blackPath": "~/.local/bin/black",
+	"python.languageServer": "Pylance",
+	"python.analysis.typeCheckingMode": "basic",
+	"python.analysis.typeshedPaths": [".venv/Lib/site-packages"],
+	"python.analysis.diagnosticMode": "openFilesOnly",
 	"[python]": {
-		"editor.defaultFormatter": "ms-python.black-formatter"
-	}
+		"editor.formatOnType": true,
+		"editor.defaultFormatter": "ms-python.black-formatter",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		},
+		"editor.insertSpaces": true,
+		"editor.tabSize": 4
+	},
+	"python.analysis.extraPaths": [
+		"./client"
+	],
+	"python.testing.pytestPath": "pytest",
+	"python.testing.autoTestDiscoverOnSaveEnabled": true,
+	"python.testing.cwd": "./tests/",
+	"python.testing.promptToConfigure": true,
+	"python.autoComplete.extraPaths": [
+		"./src"
+	],
+	"python.defaultInterpreterPath": "/usr/bin/python3",
+	"python.envFile": "${workspaceFolder}/.env",
 }

@@ -11,8 +11,8 @@ def bend_calc(
     k_factor: float,
     tensile_strength: float,
     die_opening: float,
-    material_factor: float = 1,
     k_constant: float = 50,
+    material_factor: float = 1,
 ) -> Tuple[float, float, float]:
     # Convert angle to radians
     angle_radians = bend_angle * (math.pi / 180)

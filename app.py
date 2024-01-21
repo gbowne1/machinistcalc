@@ -1,11 +1,11 @@
 from app.bendcalc import bend_calc
+from app.boltcircle import bolt_circle
 from app.lathecalc import lathe_calc
 from app.punchtonnage import punch_tonnage
 from app.sheetmetalcalc import sheetmetal_calc
 from app.speedfeed import (calculate_afpt, calculate_feed, calculate_hp,
                            calculate_ipt, calculate_mrr, calculate_sfm,
                            calculate_speed, speed_feed)
-from app.boltcircle import bolt_circle
 
 
 def menu():
