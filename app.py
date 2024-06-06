@@ -3,10 +3,8 @@ from app.boltcircle import bolt_circle
 from app.lathecalc import lathe_calc
 from app.punchtonnage import punch_tonnage
 from app.sheetmetalcalc import sheetmetal_calc
-from app.speedfeed import (calculate_afpt, calculate_feed, calculate_hp,
-                           calculate_ipt, calculate_mrr, calculate_sfm,
-                           calculate_speed, speed_feed)
-
+from app.lathecalc import lathe_calc
+from app.millingcalc import milling_calc
 
 def menu():
     while True:
@@ -22,31 +20,21 @@ def menu():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            # Call the bend calculator function from bendcalc.py
             bend_calc()
         elif choice == "2":
-            # Call the lathe calculator function from lathecalc.py
             lathe_calc()
         elif choice == "3":
-            # Call the lathe calculator function from lathecalc.py
             sheetmetal_calc()
         elif choice == "4":
-            # Call the speed and feed calculator function from speedfeed.py
-            calculate_afpt()
-            calculate_feed()
-            calculate_hp()
-            calculate_ipt()
-            calculate_mrr()
-            calculate_speed()
-            calculate_sfm()
-            speed_feed()
-            # Add other functions as needed
+            milling_calc()
         elif choice == "5":
-            # Call the lathe calculator function from lathecalc.py
             punch_tonnage()
         elif choice == "6":
-            # Call the lathe calculator function from lathecalc.py
-            bolt_circle()
+            diameter = float(input("Enter the diameter of the bolt circle: "))
+            num_holes = int(input("Enter the number of holes: "))
+            coordinates = bolt_circle(diameter, num_holes)
+            for i, (x, y) in enumerate(coordinates, start=1):
+                print(f"Hole {i}: ({x:.2f}, {y:.2f})")
         elif choice == "7":
             print("Quitting the application")
             break
@@ -55,3 +43,4 @@ def menu():
 
 if __name__ == "__main__":
     menu()
+

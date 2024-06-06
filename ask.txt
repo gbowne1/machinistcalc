@@ -1,4 +1,4 @@
-I am creating a python3 application for Shortwave Radio listeners and Amateur radio operators called RadioLogger.  I am using
+I am creating a python3 application for
 
 pyton3 3.7.3
 

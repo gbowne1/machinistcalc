@@ -3,24 +3,22 @@
     "configurations": [
         {
             "name": "Python: Current File",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "/${file}",
             "console": "integratedTerminal"
         },
         {
             "name": "Python: Module",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "module.name",
             "console": "integratedTerminal"
         },
         {
             "name": "Python: Attach",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
-            "port": 3000,
-            "host": "localhost"
         }
     ]
 }

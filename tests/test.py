@@ -1,5 +1,5 @@
 import pytest
-from machinistcalc.app.speedfeed import calculate_speed, calculate_feed
+from app.lathecalc import calculate_sfpm, calculate_feed, calculate_speed
 
 def test_calculate_speed():
     result = calculate_speed(1000, 2)
