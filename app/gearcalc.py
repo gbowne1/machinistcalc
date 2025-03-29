@@ -1,35 +1,159 @@
 import math
 
 class GearCalculator:
-    def __init__(self, module, number_of_teeth, pressure_angle):
+    def __init__(self, num_teeth: int = None, module: float = None, pitch_diameter: float = None, pressure_angle: float = 20):
+        """
+        Initialize the GearCalculator with number of teeth, module, pitch diameter, and pressure angle.
+
+        :param num_teeth: Number of teeth on the gear
+        :param module: Module of the gear
+        :param pitch_diameter: Pitch diameter of the gear
+        :param pressure_angle: Pressure angle in degrees
+        """
+        if num_teeth is not None and num_teeth <= 0:
+            raise ValueError("Number of teeth must be greater than zero")
+        if module is not None and module <= 0:
+            raise ValueError("Module must be greater than zero")
+        if pitch_diameter is not None and pitch_diameter <= 0:
+            raise ValueError("Pitch diameter must be greater than zero")
+        if not (0 <= pressure_angle <= 90):
+            raise ValueError("Pressure angle must be between 0 and 90 degrees")
+
+        self.num_teeth = num_teeth
         self.module = module
-        self.number_of_teeth = number_of_teeth
-        self.pressure_angle = pressure_angle
+        self.pitch_diameter = pitch_diameter
+        self.pressure_angle = math.radians(pressure_angle)  # convert to radians
 
-    def calculate_reference_diameter(self):
-        return self.module * self.number_of_teeth
+    def calculate_pitch_diameter(self) -> float:
+        """
+        Calculate the pitch diameter of the gear.
 
-    def calculate_addendum(self):
+        :return: Pitch diameter
+        """
+        if self.num_teeth and self.module:
+            self.pitch_diameter = self.num_teeth * self.module
+        return self.pitch_diameter
+
+    def calculate_module(self) -> float:
+        """
+        Calculate the module of the gear.
+
+        :return: Module
+        """
+        if self.pitch_diameter and self.num_teeth:
+            self.module = self.pitch_diameter / self.num_teeth
         return self.module
 
-    def calculate_dedendum(self):
-        return 1.25 * self.module
+    def calculate_circular_pitch(self) -> float:
+        """
+        Calculate the circular pitch of the gear.
 
-    def calculate_tooth_height(self):
+        :return: Circular pitch
+        """
+        if self.module:
+            return self.module * math.pi
+        return None
+
+    def calculate_addendum(self) -> float:
+        """
+        Calculate the addendum of the gear.
+
+        :return: Addendum
+        """
+        if self.module:
+            return self.module
+        return None
+
+    def calculate_dedendum(self) -> float:
+        """
+        Calculate the dedendum of the gear.
+
+        :return: Dedendum
+        """
+        if self.module:
+            return 1.25 * self.module
+        return None
+
+    def calculate_tooth_height(self) -> float:
+        """
+        Calculate the total tooth height of the gear.
+
+        :return: Tooth height
+        """
         return self.calculate_addendum() + self.calculate_dedendum()
 
-    def calculate_gear_ratio(self, teeth1, teeth2):
-        return teeth2 / teeth1
+    def calculate_clearance(self) -> float:
+        """
+        Calculate the clearance of the gear.
+
+        :return: Clearance
+        """
+        if self.module:
+            return 0.25 * self.module
+        return None
+
+    def calculate_gear_tooth_thickness(self) -> float:
+        """
+        Calculate the gear tooth thickness.
+
+        :return: Gear tooth thickness
+        """
+        if self.module:
+            return math.pi / 2 * self.module / 2
+        return None
+
+    def calculate_base_circle_diameter(self) -> float:
+        """
+        Calculate the base circle diameter of the gear.
+
+        :return: Base circle diameter
+        """
+        if self.pitch_diameter and self.pressure_angle:
+            return self.pitch_diameter * math.cos(self.pressure_angle)
+        return None
+
+    def calculate_outside_diameter(self) -> float:
+        """
+        Calculate the outside diameter of the gear.
+
+        :return: Outside diameter
+        """
+        if self.pitch_diameter and self.module:
+            return self.pitch_diameter + 2 * self.module
+        return None
+
+    def calculate_root_diameter(self) -> float:
+        """
+        Calculate the root diameter of the gear.
+
+        :return: Root diameter
+        """
+        if self.pitch_diameter and self.module:
+            return self.pitch_diameter - 2.5 * self.module
+        return None
+
+    def calculate_gear_ratio(self, other_gear_teeth: int) -> float:
+        """
+        Calculate the gear ratio given the number of teeth on two gears.
+
+        :param other_gear_teeth: Number of teeth on the other gear
+        :return: Gear ratio
+        """
+        if self.num_teeth and other_gear_teeth:
+            return self.num_teeth / other_gear_teeth
+        return None
 
 # Example usage
 if __name__ == "__main__":
-    module = 1.0
-    number_of_teeth = 20
-    pressure_angle = 20  # in degrees
-
-    calc = GearCalculator(module, number_of_teeth, pressure_angle)
-    print("Reference Diameter:", calc.calculate_reference_diameter())
-    print("Addendum:", calc.calculate_addendum())
-    print("Dedendum:", calc.calculate_dedendum())
-    print("Tooth Height:", calc.calculate_tooth_height())
-    print("Gear Ratio:", calc.calculate_gear_ratio(20, 40))
+    gear = GearCalculator(num_teeth=20, module=2)
+    print("Pitch Diameter:", gear.calculate_pitch_diameter())
+    print("Outside Diameter:", gear.calculate_outside_diameter())
+    print("Root Diameter:", gear.calculate_root_diameter())
+    print("Base Circle Diameter:", gear.calculate_base_circle_diameter())
+    print("Circular Pitch:", gear.calculate_circular_pitch())
+    print("Addendum:", gear.calculate_addendum())
+    print("Dedendum:", gear.calculate_dedendum())
+    print("Tooth Height:", gear.calculate_tooth_height())
+    print("Clearance:", gear.calculate_clearance())
+    print("Gear Tooth Thickness:", gear.calculate_gear_tooth_thickness())
+    print("Gear Ratio with 40 teeth gear:", gear.calculate_gear_ratio(40))
