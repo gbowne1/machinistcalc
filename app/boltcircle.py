@@ -1,4 +1,6 @@
 import math
+from typing import List, Tuple
+
 
 def bolt_circle(diameter, num_holes):
     angle = 360 / num_holes
@@ -8,4 +10,4 @@ def bolt_circle(diameter, num_holes):
         y = diameter/2 * math.sin(math.radians(i*angle))
         coordinates.append((x, y))
     return coordinates
-
+    return coordinates
